@@ -58,20 +58,6 @@ This project integrates **data warehousing** and **analytics** to provide a scal
 
 ## Project Structure
 Investment-Risk-Management-Analytics/
-│
-├── README.md
-├── scripts/
-│   ├── create_tables.sql
-│   ├── load_data.sql
-│   ├── materialized_views.sql
-│   └── stored_procedures.sql
-├── data/
-│   ├── branches.csv
-│   ├── customers.csv
-│   └── products.csv
-└── docs/
-    ├── ER_Diagram.png
-    └── Data_Flow_Diagram.png
 
 ## Analytics Capabilities
 - **Business Unit Analysis** : Total outstanding balance and classified amounts by business unit.
