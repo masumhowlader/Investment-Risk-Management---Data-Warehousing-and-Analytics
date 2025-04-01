@@ -72,3 +72,10 @@ Investment-Risk-Management-Analytics/
 └── docs/
     ├── ER_Diagram.png
     └── Data_Flow_Diagram.png
+
+## Analytics Capabilities
+- **Business Unit Analysis** : Total outstanding balance and classified amounts by business unit.
+- **Loan Classification** : Risk-weighted analysis of loan statuses.
+- **Customer Insights** : Customer-wise financing and type-based aggregations.
+- **Geographical Breakdown** : Hierarchical analysis by division, zone, district, and thana.
+
