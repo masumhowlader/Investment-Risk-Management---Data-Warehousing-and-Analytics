@@ -1,0 +1,161 @@
+CREATE TABLE DIM_DATE
+(
+    DATE_ID         NUMBER (8) PRIMARY KEY,
+    FULL_DATE       DATE,
+    DAY             NUMBER (2),
+    MONTH           NUMBER (2),
+    YEAR            NUMBER (4),
+    QUARTER         NUMBER (1),
+    DAY_OF_WEEK     VARCHAR2 (10),
+    IS_MONTH_END    NUMBER (1)
+);
+
+CREATE TABLE DIM_SECTOR
+(
+    SECTOR_ID          NUMBER (4) PRIMARY KEY,            -- New synthetic key
+    ECONOMIC_CODE      VARCHAR2 (30),                      -- Original ECOCODE
+    SECTOR_NAME        VARCHAR2 (100),
+    PARENT_ID          NUMBER (4),      -- References sector_key (not ECOCODE)
+    HIERARCHY_LEVEL    NUMBER (2),
+    HIERARCHY_PATH     VARCHAR2 (500),
+    IS_LEAF            NUMBER (1),
+    CONSTRAINT FK_PARENT FOREIGN KEY (PARENT_ID)
+        REFERENCES DIM_SECTOR (SECTOR_ID)
+);
+
+CREATE TABLE DIM_CUSTOMER
+(
+    CUSTOMER_ID      NUMBER (9) PRIMARY KEY,
+    CUSTOMER_NAME    VARCHAR2 (50 BYTE),
+    CUSTOMER_TYPE    VARCHAR2 (30 BYTE)
+);
+
+CREATE TABLE DIM_PRODUCT
+(
+    PRODUCT_ID        NUMBER (4) PRIMARY KEY,
+    PRODUCT_CODE      VARCHAR2 (3 BYTE),
+    PRODUCT_NAME      VARCHAR2 (70 BYTE),
+    INV_MODE          VARCHAR2 (50 BYTE),
+    IS_INSTALLMENT    NUMBER (1)
+);
+
+CREATE TABLE DIM_BRANCH
+(
+    BRANCH_ID      VARCHAR2 (10 BYTE) PRIMARY KEY,
+    BRANCH_NAME    VARCHAR2 (50 BYTE),
+    DISTRICT       VARCHAR2 (30 BYTE),
+    THANA          VARCHAR2 (30 BYTE),
+    DIVISION       VARCHAR2 (30 BYTE),
+    ZONE           VARCHAR2 (30 BYTE)
+);
+
+CREATE TABLE DIM_CL_CATEGORY
+(
+    CL_CATEGORY_ID    NUMBER (2) PRIMARY KEY,
+    CL_CODE           VARCHAR2 (2 BYTE),
+    CL_DESCRIPTION    VARCHAR2 (50 BYTE),
+    RISK_WEIGHT       NUMBER (3, 2)
+);
+
+CREATE TABLE DIM_BUSINESS_UNIT
+(
+    BUSINESS_UNIT_ID      NUMBER (2) PRIMARY KEY,
+    BUSINESS_UNIT_NAME    VARCHAR2 (20 BYTE)
+);
+
+CREATE TABLE DIM_CLASSIFICATION
+(
+    STATUS_CODE      VARCHAR2 (3) PRIMARY KEY,            -- E.G., "STD", "SS"
+    STATUS_NAME      VARCHAR2 (20),         -- E.G., "STANDARD", "SUBSTANDARD"
+    RISK_WEIGHT      NUMBER (3, 2),           -- E.G., 0.0 FOR STD, 0.2 FOR SS
+    IS_PERFORMING    NUMBER (1)
+);
+
+CREATE TABLE FACT_FINANCING
+(
+    FACT_ID                NUMBER PRIMARY KEY,
+    PROCESS_DATE_ID        NUMBER (8),
+    CUSTOMER_ID            NUMBER (9),
+    BRANCH_ID              VARCHAR2 (10 BYTE),
+    PRODUCT_ID             NUMBER (4),
+    SECTOR_ID              NUMBER (4),
+    CL_CATEGORY_ID         NUMBER (2),
+    BUSINESS_UNIT_ID       NUMBER (2),
+    CL_STATUS              VARCHAR2 (3 BYTE),
+    OUTSTANDING_BALANCE    NUMBER (20, 2),
+    PRINCIPAL_BALANCE      NUMBER (20, 2),
+    CLASSIFIED_AMOUNT      NUMBER (20, 2),
+    NO_OF_ACCOUNTS         NUMBER (1),
+    IS_INSTALLMENT         NUMBER (1),
+    FOREIGN KEY (PROCESS_DATE_ID) REFERENCES DIM_DATE (DATE_ID),
+    FOREIGN KEY (CUSTOMER_ID) REFERENCES DIM_CUSTOMER (CUSTOMER_ID),
+    FOREIGN KEY (BRANCH_ID) REFERENCES DIM_BRANCH (BRANCH_ID),
+    FOREIGN KEY (PRODUCT_ID) REFERENCES DIM_PRODUCT (PRODUCT_ID),
+    FOREIGN KEY (SECTOR_ID) REFERENCES DIM_SECTOR (SECTOR_ID),
+    FOREIGN KEY (CL_CATEGORY_ID) REFERENCES DIM_CL_CATEGORY (CL_CATEGORY_ID),
+    FOREIGN KEY (CL_STATUS) REFERENCES DIM_CLASSIFICATION (STATUS_CODE),
+    FOREIGN KEY
+        (BUSINESS_UNIT_ID)
+        REFERENCES DIM_BUSINESS_UNIT (BUSINESS_UNIT_ID)
+)
+PARTITION BY RANGE (PROCESS_DATE_ID)(PARTITION P_2020 VALUES LESS THAN (20210101),                -- Data for 2020
+ PARTITION P_2021 VALUES LESS THAN (20220101),                -- Data for 2021
+ PARTITION P_2022 VALUES LESS THAN (20230101),                -- Data for 2022
+ PARTITION P_2023 VALUES LESS THAN (20240101),                -- Data for 2023
+ PARTITION P_2024 VALUES LESS THAN (20250101),                -- Data for 2024
+ PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)               -- Future data
+                                                 );
+
+ALTER TABLE FACT_FINANCING
+    MOVE PARTITION P_2020
+        COMPRESS BASIC;
+
+ALTER TABLE FACT_FINANCING
+    MOVE PARTITION P_2021
+        COMPRESS BASIC;
+
+ALTER TABLE FACT_FINANCING
+    MOVE PARTITION P_2022
+        COMPRESS BASIC;
+
+ALTER TABLE FACT_FINANCING
+    MOVE PARTITION P_2023
+        COMPRESS FOR OLTP;
+
+ALTER TABLE FACT_FINANCING
+    MOVE PARTITION P_2024
+        NOCOMPRESS;
+
+BEGIN
+    FOR I
+        IN (SELECT TABLE_NAME,
+                   COLUMN_NAME,
+                   'IDX_' || TABLE_NAME || '_' || COLUMN_NAME     INDEX_NAME
+              FROM USER_TAB_COLUMNS
+             WHERE    (TABLE_NAME = 'DIM_DATE' AND COLUMN_NAME <> 'DATE_ID')
+                   OR (    TABLE_NAME = 'FACT_FINANCING'
+                       AND COLUMN_NAME NOT IN ('FACT_ID',
+                                               'OUTSTANDING_BALANCE',
+                                               'PRINCIPAL_BALANCE',
+                                               'CLASSIFIED_AMOUNT',
+                                               'NO_OF_ACCOUNTS'))
+                   OR (    TABLE_NAME = 'DIM_SECTOR'
+                       AND COLUMN_NAME = 'PARENT_ID')
+                   OR (    TABLE_NAME = 'DIM_CUSTOMER'
+                       AND COLUMN_NAME = 'CUSTOMER_TYPE')
+                   OR (    TABLE_NAME = 'DIM_BRANCH'
+                       AND COLUMN_NAME IN ('DISTRICT', 'DIVISION'))
+                   OR (    TABLE_NAME = 'DIM_PRODUCT'
+                       AND COLUMN_NAME IN ('PRODUCT_CODE', 'PRODUCT_NAME')))
+    LOOP
+        BEGIN
+            EXECUTE IMMEDIATE   'CREATE INDEX '
+                             || I.INDEX_NAME
+                             || ' ON '
+                             || I.TABLE_NAME
+                             || '('
+                             || I.COLUMN_NAME
+                             || ')';
+        END;
+    END LOOP;
+END;

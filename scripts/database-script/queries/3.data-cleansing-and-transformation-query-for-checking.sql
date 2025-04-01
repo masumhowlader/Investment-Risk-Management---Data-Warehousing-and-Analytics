@@ -1,0 +1,240 @@
+--1. Branch Table:
+--1.1. Checked duplicate records and found 0 duplicate records
+  SELECT BRANCH_ID, COUNT (1)
+    FROM SRC_BRANCHES
+GROUP BY BRANCH_ID
+  HAVING COUNT (1) > 1;
+  
+  SELECT BRANCH_NAME, COUNT (1)
+    FROM SRC_BRANCHES
+GROUP BY BRANCH_NAME
+  HAVING COUNT (1) > 1;  
+ --1.2. Checked null values and found 9 records
+SELECT *
+  FROM SRC_BRANCHES
+ WHERE    BRANCH_NAME IS NULL
+       OR BRANCH_ZONE IS NULL
+       OR DISTRICT IS NULL
+       OR THANA IS NULL;
+ --1.3. Checked records with unnecessary spaces and found 15 records
+ SELECT *
+  FROM SRC_BRANCHES
+ WHERE    BRANCH_NAME <> TRIM (BRANCH_NAME)
+       OR BRANCH_ZONE <> TRIM (BRANCH_ZONE)
+       OR DISTRICT <> TRIM (DISTRICT)
+       OR THANA <> TRIM (THANA);
+	   
+--2. BUSINESS_UNITS Table:	   
+--2.1. Checked duplicate records and found 0 duplicate records
+  SELECT BUSINESS_UNIT_ID, COUNT (1)
+    FROM SRC_BUSINESS_UNITS
+GROUP BY BUSINESS_UNIT_ID
+HAVING COUNT(1) > 1;	  
+
+  SELECT BUSINESS_UNIT_NAME, COUNT (1)
+    FROM SRC_BUSINESS_UNITS
+GROUP BY BUSINESS_UNIT_NAME
+  HAVING COUNT (1) > 1;
+--2.2. Checked null values and found 0 records
+  SELECT *
+    FROM SRC_BUSINESS_UNITS
+WHERE BUSINESS_UNIT_NAME IS NULL;
+--2.3. Checked records with unnecessary spaces and found 0 records
+ SELECT *
+  FROM SRC_BUSINESS_UNITS
+ WHERE    BUSINESS_UNIT_NAME <> TRIM (BUSINESS_UNIT_NAME);
+ 
+--3. CL_CATEGORIES Table:	   
+--3.1. Checked duplicate records and found 0 duplicate records
+  SELECT ID, COUNT (1)
+    FROM SRC_CL_CATEGORIES
+GROUP BY ID
+HAVING COUNT(1) > 1;
+
+  SELECT DESCRIPTION, COUNT (1)
+    FROM SRC_CL_CATEGORIES
+GROUP BY DESCRIPTION
+  HAVING COUNT (1) > 1;
+--3.2. Checked null values and found 0 records
+  SELECT *
+    FROM SRC_CL_CATEGORIES
+WHERE CL_CODE IS NULL OR DESCRIPTION IS NULL;
+--3.3. Checked records with unnecessary spaces and found 0 records
+SELECT *
+  FROM SRC_CL_CATEGORIES
+ WHERE CL_CODE <> TRIM (CL_CODE) OR DESCRIPTION <> TRIM (DESCRIPTION);
+ --3.4. Length of CL Code to be 2, requiring LPAD with 0 if necessary
+ 
+--4. CUSTOMERS Table:	   
+--4.1. Checked duplicate records and found 9 duplicate records
+  SELECT CUSTOMER_ID, COUNT (1)
+    FROM SRC_CUSTOMERS
+GROUP BY CUSTOMER_ID
+  HAVING COUNT (1) > 1;
+--4.2. Checked null values and found 0 records
+SELECT *
+  FROM SRC_CUSTOMERS
+ WHERE CUSTOMER_NAME IS NULL OR CUSTOMER_CATEGORY_ID IS NULL;
+--4.3. Checked records with unnecessary spaces and found 17 records
+SELECT *
+  FROM SRC_CUSTOMERS
+ WHERE CUSTOMER_NAME <> TRIM (CUSTOMER_NAME) OR CUSTOMER_CATEGORY_ID <> TRIM (CUSTOMER_CATEGORY_ID);
+ 
+ 
+ 
+ -----8,972 records found
+ SELECT * FROM SRC_CUSTOMERS2
+WHERE SECTOR_CODE IS NULL OR CUSTOMER_SECTOR_TYPE IS NULL OR CUSTOMER_RISK_LEVEL IS NULL;
+
+----251 records found
+SELECT * FROM SRC_CUSTOMERS
+WHERE SECTOR_CODE IS NULL OR CUSTOMER_SECTOR_TYPE IS NULL OR CUSTOMER_RISK_LEVEL IS NULL;
+
+
+--5. CUSTOMER_TYPES Table:	   
+--5.1. Checked duplicate records and found 0 duplicate records
+  SELECT CUSTOMER_TYPE_ID, COUNT (1)
+    FROM SRC_CUSTOMER_TYPES
+GROUP BY CUSTOMER_TYPE_ID
+  HAVING COUNT (1) > 1;
+  
+  SELECT DESCRIPTION, COUNT (1)
+    FROM SRC_CUSTOMER_TYPES
+GROUP BY DESCRIPTION
+  HAVING COUNT (1) > 1;  
+--5.2. Checked null values and found 0 records
+SELECT *
+  FROM SRC_CUSTOMER_TYPES
+ WHERE DESCRIPTION IS NULL OR CUSTOMER_TYPE IS NULL;
+--5.3. Checked records with unnecessary spaces and found 0 records
+SELECT *
+  FROM SRC_CUSTOMER_TYPES
+ WHERE DESCRIPTION <> TRIM (DESCRIPTION) OR CUSTOMER_TYPE <> TRIM (CUSTOMER_TYPE);
+ 
+--6. DISTRICTS Table:	   
+--6.1. Checked duplicate records and found 0 duplicate records
+  SELECT DISTRICT_ID, COUNT (1)
+    FROM SRC_DISTRICTS
+GROUP BY DISTRICT_ID
+  HAVING COUNT (1) > 1;
+  
+  SELECT DISTRICT_TITLE, COUNT (1)
+    FROM SRC_DISTRICTS
+GROUP BY DISTRICT_TITLE
+  HAVING COUNT (1) > 1;  
+--6.2. Checked null values and found 2 records
+SELECT *
+  FROM SRC_DISTRICTS
+ WHERE DISTRICT_TITLE IS NULL OR DIVISION_ID IS NULL;
+--6.3. Checked records with unnecessary spaces and found 0 records
+SELECT *
+  FROM SRC_DISTRICTS
+ WHERE DISTRICT_TITLE <> TRIM (DISTRICT_TITLE) OR DIVISION_ID <> TRIM (DIVISION_ID);
+ 
+--7. DIVISIONS Table:	   
+--7.1. Checked duplicate records and found 0 duplicate records
+  SELECT DIVISION_ID, COUNT (1)
+    FROM SRC_DIVISIONS
+GROUP BY DIVISION_ID
+  HAVING COUNT (1) > 1;
+  
+  SELECT DIVISION_NAME, COUNT (1)
+    FROM SRC_DIVISIONS
+GROUP BY DIVISION_NAME
+  HAVING COUNT (1) > 1;  
+--7.2. Checked null values and found 0 records
+SELECT *
+  FROM SRC_DIVISIONS
+ WHERE DIVISION_NAME IS NULL;
+--7.3. Checked records with unnecessary spaces and found 0 records
+SELECT *
+  FROM SRC_DIVISIONS
+ WHERE DIVISION_NAME <> TRIM (DIVISION_NAME);
+ 
+--8. PRODUCTS Table:	   
+--8.1. Checked duplicate records and found 0 duplicate records
+  SELECT ID, COUNT (1)
+    FROM SRC_PRODUCTS
+GROUP BY ID
+  HAVING COUNT (1) > 1;
+
+  SELECT PRODUCT_CODE, COUNT (1)
+    FROM SRC_PRODUCTS
+GROUP BY PRODUCT_CODE
+  HAVING COUNT (1) > 1;
+  
+  SELECT PRODUCT_NAME, COUNT (1)
+    FROM SRC_PRODUCTS
+GROUP BY PRODUCT_NAME
+  HAVING COUNT (1) > 1; 
+--8.2. Checked null values and found 0 records
+SELECT *
+  FROM SRC_PRODUCTS
+ WHERE    PRODUCT_CODE IS NULL
+       OR PRODUCT_NAME IS NULL
+       OR FPLOANCATEGORYCODE IS NULL
+       OR IS_INSTALLMENT IS NULL
+       OR IS_QUARD_ON_DEP_ACC IS NULL
+       OR IS_PROFIT_REALIZED_AS_RENT IS NULL
+       OR IS_STAFF_ACC IS NULL
+       OR FPLOANCATEGORYCODE IS NULL;
+--8.3. Checked records with unnecessary spaces and found 0 records
+SELECT *
+  FROM SRC_PRODUCTS
+ WHERE    PRODUCT_CODE <> TRIM (PRODUCT_CODE)
+       OR PRODUCT_NAME <> TRIM (PRODUCT_NAME)
+       OR FPLOANCATEGORYCODE <> TRIM (FPLOANCATEGORYCODE);
+	   
+--9. SECTORS Table:	   
+--9.1. Checked duplicate records and found 0 duplicate records
+  SELECT ID, COUNT (1)
+    FROM SRC_SECTORS
+GROUP BY ID
+  HAVING COUNT (1) > 1;
+--9.2. Checked null values and found 0 records
+SELECT *
+  FROM SRC_SECTORS
+ WHERE    ECODESCRIPTION IS NULL;
+--9.3. Checked records with unnecessary spaces and found 0 records
+SELECT *
+  FROM SRC_SECTORS
+ WHERE    ECODESCRIPTION <> TRIM (ECODESCRIPTION)
+       OR ECOCODE <> TRIM (ECOCODE);
+	   
+--10. MONTHLY_ACCOUNT_BALANCES Table:	   
+--10.1. Null value checking
+SELECT *
+  FROM SRC_MONTHLY_ACCOUNT_BALANCES
+ WHERE    ECONOMIC_CODE IS NULL
+       OR CL_CODE IS NULL
+       OR BUSINESS_UNIT IS NULL
+       OR ACC_BRANCH_ID IS NULL
+       OR PRODUCT_CODE IS NULL
+       OR ACC_BRANCH_ID IS NULL
+       OR CUSTOMER_ID IS NULL;
+
+--10.2. Data Integrity Checked       
+SELECT *
+  FROM SRC_MONTHLY_ACCOUNT_BALANCES B
+ WHERE     EXISTS
+               (SELECT 1
+                  FROM SRC_CUSTOMERS C
+                 WHERE B.CUSTOMER_ID = C.CUSTOMER_ID)
+       AND EXISTS
+               (SELECT 1
+                  FROM SRC_BRANCHES BR
+                 WHERE B.ACC_BRANCH_ID = BR.BRANCH_ID)
+       AND EXISTS
+               (SELECT 1
+                  FROM SRC_PRODUCTS P
+                 WHERE B.PRODUCT_CODE = P.PRODUCT_CODE)
+       AND CL_CODE IS NOT NULL
+       AND BUSINESS_UNIT IS NOT NULL
+       AND CL_STATUS IS NOT NULL
+       AND EXISTS
+               (SELECT 1
+                  FROM SRC_CL_CATEGORIES CC
+                 WHERE B.CL_CODE = CC.CL_CODE)
+       AND CUSTOMER_NAME IS NOT NULL
+       AND PROCESS_DATE IS NOT NULL;
+	   

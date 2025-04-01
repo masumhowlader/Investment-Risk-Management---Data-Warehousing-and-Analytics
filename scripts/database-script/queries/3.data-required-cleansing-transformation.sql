@@ -1,0 +1,83 @@
+--1. SRC_BRANCHES Table:	 
+--1.2. Checked null values and found 9 records  HANDLED
+SELECT *
+  FROM SRC_BRANCHES
+ WHERE    BRANCH_NAME IS NULL
+       OR BRANCH_ZONE IS NULL
+       OR DISTRICT IS NULL
+       OR THANA IS NULL;
+--1.3. Checked records with unnecessary spaces and found 15 records HANDLED
+ SELECT *
+  FROM SRC_BRANCHES
+ WHERE    BRANCH_NAME <> TRIM (BRANCH_NAME)
+       OR BRANCH_ZONE <> TRIM (BRANCH_ZONE)
+       OR DISTRICT <> TRIM (DISTRICT)
+       OR THANA <> TRIM (THANA);
+	   
+--4. CUSTOMERS, SRC_CUSTOMERS2 Table:	   
+--4.1. Checked duplicate records and found 9 duplicate records HANDLED
+  SELECT CUSTOMER_ID, COUNT (1)
+    FROM SRC_CUSTOMERS
+GROUP BY CUSTOMER_ID
+  HAVING COUNT (1) > 1;
+--4.3. Checked records with unnecessary spaces and found 17 records HANDLED
+SELECT *
+  FROM SRC_CUSTOMERS
+ WHERE CUSTOMER_NAME <> TRIM (CUSTOMER_NAME) OR CUSTOMER_CATEGORY_ID <> TRIM (CUSTOMER_CATEGORY_ID);
+ 
+----9223 records found
+SELECT * FROM SRC_CUSTOMERS
+WHERE SECTOR_CODE IS NULL OR CUSTOMER_SECTOR_TYPE IS NULL OR CUSTOMER_RISK_LEVEL IS NULL;
+
+--6. DISTRICTS Table:	   
+--6.2. Checked null values and found 2 records HANDLED
+SELECT *
+  FROM SRC_DISTRICTS
+ WHERE DISTRICT_TITLE IS NULL OR DIVISION_ID IS NULL;
+
+--8. PRODUCTS Table:	   
+--8.2. Checked null values and found 0 records
+SELECT *
+  FROM SRC_PRODUCTS
+ WHERE    PRODUCT_CODE IS NULL
+       OR PRODUCT_NAME IS NULL
+       OR FPLOANCATEGORYCODE IS NULL
+       OR IS_INSTALLMENT IS NULL
+       OR IS_QUARD_ON_DEP_ACC IS NULL
+       OR IS_PROFIT_REALIZED_AS_RENT IS NULL
+       OR IS_STAFF_ACC IS NULL
+       OR FPLOANCATEGORYCODE IS NULL;
+	   
+
+--11. MONTHLY_ACCOUNT_BALANCES Table:	   
+--11.1. Null value checking
+SELECT *
+  FROM SRC_MONTHLY_ACCOUNT_BALANCES
+ WHERE    ECONOMIC_CODE IS NULL
+       OR CL_CODE IS NULL
+       OR BUSINESS_UNIT IS NULL
+       OR ACC_BRANCH_ID IS NULL
+       OR PRODUCT_CODE IS NULL
+       OR BRANCH_ID IS NULL
+       OR CUSTOMER_ID IS NULL;
+
+--11.2. Data Integrity Checked       
+SELECT *
+  FROM SRC_MONTHLY_ACCOUNT_BALANCES B
+ WHERE     NOT EXISTS
+               (SELECT 1
+                  FROM SRC_CUSTOMERS C
+                 WHERE B.CUSTOMER_ID = C.CUSTOMER_ID)
+       OR NOT EXISTS
+               (SELECT 1
+                  FROM SRC_BRANCHES BR
+                 WHERE B.ACC_BRANCH_ID = BR.BRANCH_ID)
+       OR NOT EXISTS
+               (SELECT 1
+                  FROM SRC_PRODUCTS P
+                 WHERE B.PRODUCT_CODE = P.PRODUCT_CODE)
+       OR NOT EXISTS
+               (SELECT 1
+                  FROM SRC_CL_CATEGORIES CC
+                 WHERE B.CL_CODE = CC.CL_CODE);
+	   
