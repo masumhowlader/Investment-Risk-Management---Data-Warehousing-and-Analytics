@@ -58,6 +58,10 @@ This project integrates **data warehousing** and **analytics** to provide a scal
 
 ## Project Structure
 Investment-Risk-Management-Analytics/
+|--data/
+|--scripts/
+   |--database-script
+   |--python-script
 
 ## Analytics Capabilities
 - **Business Unit Analysis** : Total outstanding balance and classified amounts by business unit.
