@@ -59,19 +59,46 @@ This project integrates **data warehousing** and **analytics** to provide a scal
 ## Project Structure
 Investment-Risk-Management-Analytics/
 │
-├── README.md
-├── scripts/
-│   ├── create_tables.sql
-│   ├── load_data.sql
-│   ├── materialized_views.sql
-│   └── stored_procedures.sql
-├── data/
-│   ├── branches.csv
-│   ├── customers.csv
-│   └── products.csv
-└── docs/
-    ├── ER_Diagram.png
-    └── Data_Flow_Diagram.png
+├── README.md                     # Project overview and instructions
+├── LICENSE                       # License file
+├── data/                         # Raw CSV files
+│   ├── BBSECTORINFO.csv
+│   ├── BRANCHES.csv
+│   ├── BUSINESS_UNITS.csv
+│   ├── CL_CATEGORIES.csv
+│   ├── CUSTOMERS.csv
+│   ├── CUSTOMER_TYPES.csv
+│   ├── DISTRICTS.csv
+│   ├── DIVISIONS.csv
+│   ├── MONTHLY_ACCOUNT_BALANCES.csv
+│   ├── PRODUCTS.csv
+│   ├── SECTORS.csv
+│   └── THANAS.csv
+├── scripts/                      # SQL and Python scripts
+│   ├── database-script/          # Database-related scripts
+│   │   ├── ddl/                  # Data Definition Language scripts
+│   │   │   ├── Functions.sql
+│   │   │   ├── source-table-script.sql
+│   │   │   ├── staging-table-script.sql
+│   │   │   ├── star-schema-tables.sql
+│   │   │   ├── exec-procedures.sql
+│   │   │   ├── analytics-materialized_view.sql
+│   │   │   ├── load_stg_schema-data.sql
+│   │   │   └── load_star_schema-data.sql
+│   │   ├── dml/                  # Data Manipulation Language scripts
+│   │   │   └── scripts.sql
+│   │   └── queries/              # Analytical query files
+│   │       ├── query1.sql        # Example query file 1
+│   │       ├── query2.sql        # Example query file 2
+│   │       ├── query3.sql        # Example query file 3
+│   │       ├── query4.sql        # Example query file 4
+│   │       └── query5.sql        # Example query file 5 (optional)
+│   └── python-script/            # Python scripts for ETL processes
+│       └── csv-load-to-oracle-db.py
+└── docs/                         # Documentation (optional)
+    ├── ER_Diagram.png            # Entity Relationship Diagram
+    ├── Data_Flow_Diagram.png     # Data flow diagram
+    └── Analytics_Examples.md     # Examples of analytical queries
 
 ## Analytics Capabilities
 - **Business Unit Analysis** : Total outstanding balance and classified amounts by business unit.
