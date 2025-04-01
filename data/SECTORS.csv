@@ -1,0 +1,149 @@
+ID,PARENT_ID,GROUP_ID,ECOCODE_LEVEL,ECOCODE,ECODESCRIPTION,ISSHORTLISTED,ELIGIBLE_OWNER,SHOW_IN_REPORT
+1,0,,0,,ECONOMIC PURPOSES,,,N
+2,1,,1,,"Agriculture, Fishing and Forestry",,,Y
+3,1,,1,,Industry,,,Y
+4,1,,1,,Construction,,,Y
+5,1,,1,,Transport,,,Y
+6,1,,1,,Trade & Commerce,,,Y
+7,1,,1,,Other Institutional Loan,,,Y
+8,1,,1,,Consumer Finance,,,Y
+10,2,,2,,Agriculture,,,N
+11,10,,3,,Cultivation,,,N
+12,11,,4,1101,"FOOD CROPS (PADDY, WHEAT, POTATO, MAIZE ETC.)",TRUE,,N
+13,11,,4,1102,"CASH CROPS (JUTE, COTTON, TOBACCO, SUGARCANE etc.)",TRUE,,N
+14,11,,4,1103,"LENTILS (MUG, MASUR, KALAI ETC)",TRUE,,N
+15,10,,3,,Plantation,,,N
+16,15,,4,1121,Tea,TRUE,,N
+20,2,,2,,Fishing,,,N
+22,6,,2,,"Wholesale and Retail Trade (CC, OD etc.)",,,Y
+23,22,,3,8111,Wholesale Trading,TRUE,,N
+24,22,,3,8112,Retail Trading,TRUE,,N
+25,22,,3,8120,Other Commercial lending,TRUE,,N
+26,1,,1,,Miscellaneous,,,Y
+27,26,,2,9200,Private Welfare and Development Activities,TRUE,,N
+28,11,,4,1104,"Oil Seeds (Sayabeen, Mastered oil, Peanut etc.)",TRUE,,N
+29,11,,4,1105,"Spices(Onion, Garlic, Zinger etc)",TRUE,,N
+30,11,,4,1107,Vegetables,TRUE,,N
+31,10,,3,,Agricultural Machineries and Implements,,,N
+32,11,,4,1117,Flowers,TRUE,,N
+33,15,,4,1122,Rubber,TRUE,,N
+34,15,,4,1123,Sericulture,TRUE,,N
+35,15,,4,1124,"Horticulture (Mango, Banana, Pine apple, Coconut etc.)",TRUE,,N
+36,15,,4,1125,Apiculture,TRUE,,N
+37,15,,4,1126,Tissue Culture,TRUE,,N
+38,15,,4,1129,Others  Plantations,TRUE,,N
+39,31,,4,1131,Shallow/Deep Tube Well (Including Solar Energy Pump),TRUE,,N
+40,31,,4,1132,Low Lift Pumps/Other Pumps,TRUE,,N
+41,31,,4,1133,Tractors/Power Tillers,TRUE,,N
+42,31,,4,1134,Ploughing Cattle,TRUE,,N
+43,31,,4,1135,Bio-gas Plan,TRUE,,N
+44,31,,4,1139,Others (Manual Tube well/ Bullock Carts etc.),TRUE,,N
+45,10,,3,1140,Fertilizers and Pesticides Loans for Farmers,TRUE,,N
+46,10,,3,,Livestock,,,N
+47,46,,3,1151,Dairy Farming,TRUE,,N
+48,46,,3,1152,Poultry Farming,,,N
+49,46,,3,1153,Purchase of Cattle/Goat,,,N
+50,46,,3,1159,Other Livestock,,,N
+51,10,,3,1160,Vegetables/Fruits Preservation in Cold Storage,,,N
+52,10,,3,1170,Agriculture Loan Disbursed through NGOs,,,N
+53,20,,3,1210,Inland Fishing (Other than Shrimp Culture) including Pond Fishing,,,N
+54,20,,3,1220,Marine Fishing,,,N
+55,20,,3,1240,Shrimp/Prawn Culture (including Hatchery),,,N
+56,20,,3,1250,"Purchase of Fishing Equipment (Trawler, Boat, Net, etc.)",,,N
+57,20,,3,1290,Other Fishing,,,N
+58,2,,2,1300,Forestry and Logging,,,N
+59,63,,3,2000,Large Industries,,,Y
+60,63,,3,2010,Small and Medium Industries,,,Y
+61,63,,3,2020,Cottage Industries/Micro Industries,,,Y
+62,63,,3,2030,Service Industries,,,Y
+63,3,,2,3000,Term Loan (Other than Working Capital Financing),,,Y
+64,3,,2,3100,Working Capital Financing (Excluding Export & Import Financing),,,Y
+65,64,,3,3110,Large Industries,,,Y
+66,64,,3,3210,Small and Medium Industries,,,Y
+67,64,,3,3220,Cottage Industries/Micro Industries,,,Y
+68,64,,3,3310,Service Industries,,,Y
+69,4,,2,4100,Housing (Commercial) - For Developer/Contractor,,,Y
+70,4,,2,4210,Housing (Residential) in Urban Area for Individual Person,,,Y
+71,4,,2,4220,Housing (Residential) in Rural Area for Individual Person,,,Y
+72,4,,2,4230,"Infrastructure Development (Road, Culvert, Bridge, Tower, etc.)",,,Y
+73,4,,2,4240,House Renovation or Repairing or Extension,,,Y
+74,4,,2,4300,"Commercial Building (Market, Factory, Hotel, Cold Storage, Warehouse, etc.)",,,Y
+75,4,,2,4400,Establishment of Solar Panel,,,Y
+76,4,,2,4500,Effluent Treatment Plant,,,Y
+77,4,,2,4600,Loan against Work Order/Pay Order/Earnest Money,,,Y
+78,4,,2,5300,Waterworks,,,Y
+79,4,,2,5310,Sanitary Services,,,Y
+80,5,,2,6100,Road Transport (excluding Personal Vehicle & Lease Finance),,,Y
+81,5,,2,6200,Water Transport (excluding Fishing Boats),,,Y
+82,5,,2,6300,Air Transport,,,Y
+83,6,,2,8000,Procurement by Government,,,Y
+84,83,,3,8210,Jute,,,N
+85,83,,3,8220,Paddy,,,N
+86,83,,3,8230,Wheat,,,N
+87,83,,3,8290,Other Crops/Commodities,,,N
+88,6,,2,8300,"Export Financing (PC, ECC, etc.)",,,Y
+89,88,,3,8310,Jute and Jute Products,,,N
+90,89,,4,8311,Raw Jute,,,N
+91,89,,4,8312,Jute Goods,,,N
+92,88,,3,8320,Tea,,,N
+93,88,,3,8330,Hides and Skins,,,N
+94,88,,3,8340,Ready-made Garments,,,N
+95,88,,3,8390,Non-traditional Items,,,N
+96,95,,3,8391,"Fish, Shrimps, Prawns, etc.",,,N
+97,95,,3,8392,Handicrafts,,,N
+98,95,,3,8393,"Frozen Foods (Fruits, Vegetables, etc.)",,,N
+99,95,,3,8394,Medicines,,,N
+100,95,,3,8399,Other non-traditional items,TRUE,,N
+101,88,,2,8400,Other Exported Items,,,Y
+102,6,,2,8500,"Import Financing (LIM, LTR, TR, etc.)",,,Y
+103,102,,3,8401,Food Items,TRUE,,N
+104,102,,3,8402,Petroleum and Petroleum Products,TRUE,,N
+105,102,,3,8403,Machineries and Implements,TRUE,,N
+106,102,,3,8404,Textile and Textile Products,TRUE,,N
+107,102,,3,8405,Electric and Electronic goods & Spares,TRUE,,N
+108,102,,3,8406,"Sanitary Goods Including Tiles, Stones & Clinkers",TRUE,,N
+109,102,,3,8407,Cosmetics & Crockeries,TRUE,,N
+110,102,,3,8408,Medicine and Surgical Instruments,TRUE,,N
+111,102,,3,8401,New Automobiles,TRUE,,N
+112,102,,3,8411,Reconditioned Automobiles,TRUE,,N
+113,102,,3,8412,Chemicals (except Medicine),TRUE,,N
+114,102,,3,8413,Iron and Steel Products,TRUE,,N
+115,102,,3,8414,Paper and Printed Papers,TRUE,,N
+116,102,,3,8415,Computer and Accessories,TRUE,,N
+117,102,,3,8416,Wood & Logging,TRUE,,N
+118,102,,3,8417,Plastic & Plastic Products including toys,TRUE,,N
+119,102,,3,8418,Leather Goods,TRUE,,N
+120,102,,3,8419,Poultry feeds,TRUE,,N
+121,102,,3,8420,Cattle feeds,TRUE,,N
+122,102,,3,8421,Coal,TRUE,,N
+123,102,,3,8422,Ship,TRUE,,N
+124,102,,3,8499,Other Imported Items,TRUE,,N
+125,6,,2,8506,Share Trading,TRUE,,Y
+126,6,,2,8507,Lease Financing/Leasing,TRUE,,Y
+127,7,,2,,Loan to Financial Corporations,,,Y
+128,127,,3,9101,Credit to NBFI,TRUE,,Y
+129,127,,3,9102,Credit to Insurance companies,TRUE,,Y
+130,127,,3,9103,Credit to NGO,TRUE,,Y
+131,127,,3,9104,Credit to Merchant Banks/Brokerage Houses,TRUE,,Y
+132,127,,3,9105,Credit to Co-operative Banks/Societies,TRUE,,Y
+133,7,,2,9110,Financing to Educational Institutions,TRUE,,Y
+134,8,,2,9805,Doctors Loan/ Professional Loans,TRUE,,Y
+135,8,,2,9810,Flat Purchase,TRUE,,Y
+136,8,,2,9815,Transport loan (Motor car/Motor cycle etc.),TRUE,,Y
+137,8,,2,9820,"Consumer Goods (TV, Freeze, Air Coolar, Computer, Furniture etc.)",TRUE,,Y
+138,8,,2,9830,Credit Cards,TRUE,,Y
+139,8,,2,9840,Educational Expenses,TRUE,,Y
+140,8,,2,9850,Treatment Expenses,TRUE,,Y
+141,8,,2,9860,Marriage Expenses,TRUE,,Y
+142,8,,2,9870,Land Purchase,TRUE,,Y
+143,8,,2,9871,Loan against Salary,TRUE,,Y
+144,8,,2,9872,Loan against PF,TRUE,,Y
+145,8,,2,9873,"Personal Loan against DPS, MSS",TRUE,,Y
+146,8,,2,9874,"Personal Loan against FDR, MBS, DBS etc.",TRUE,,Y
+147,8,,2,9875,Travelling/ Holiday Loan,TRUE,,Y
+148,8,,2,9899,Other personal Loans,TRUE,,Y
+149,26,,2,9300,"Advances for Special Credit Program (Special Economic Zone, EPZ, Youth development etc.)",TRUE,,N
+150,26,,2,9600,Swanirvar,TRUE,,N
+151,26,,2,9700,Poverty Alleviation Program,TRUE,,N
+152,26,,2,9909,Other loans not mentioned above,TRUE,,N
+153,11,,4,1119,Others Crops,TRUE,,N

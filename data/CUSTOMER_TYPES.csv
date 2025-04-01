@@ -1,0 +1,6 @@
+CUSTOMER_TYPE_ID,CUSTOMER_TYPE,DESCRIPTION
+1,1,Personal
+2,2,Proprietorship
+4,4,Partnership
+5,5,Personal Joint
+3,3,Company/Institution
