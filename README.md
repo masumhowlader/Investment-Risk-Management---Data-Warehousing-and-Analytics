@@ -79,3 +79,5 @@ Investment-Risk-Management-Analytics/
 - **Customer Insights** : Customer-wise financing and type-based aggregations.
 - **Geographical Breakdown** : Hierarchical analysis by division, zone, district, and thana.
 
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
