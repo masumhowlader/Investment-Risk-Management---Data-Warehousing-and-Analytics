@@ -48,7 +48,7 @@ This project integrates **data warehousing** and **analytics** to provide a scal
 ## Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/Investment-Risk-Management-Analytics.git
+   git clone https://github.com/masumhowlader/Investment-Risk-Management---Data-Warehousing-and-Analytics
 2. Set up an Oracle database instance.
 3. Set up python environment to work with Oracle database
 4. Run the SQL scripts in the scripts/database-script/ddl folder to create tables, procedures, and materialized views.
