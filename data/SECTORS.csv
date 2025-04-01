@@ -104,7 +104,6 @@ ID,PARENT_ID,GROUP_ID,ECOCODE_LEVEL,ECOCODE,ECODESCRIPTION,ISSHORTLISTED,ELIGIBL
 108,102,,3,8406,"Sanitary Goods Including Tiles, Stones & Clinkers",TRUE,,N
 109,102,,3,8407,Cosmetics & Crockeries,TRUE,,N
 110,102,,3,8408,Medicine and Surgical Instruments,TRUE,,N
-111,102,,3,8401,New Automobiles,TRUE,,N
 112,102,,3,8411,Reconditioned Automobiles,TRUE,,N
 113,102,,3,8412,Chemicals (except Medicine),TRUE,,N
 114,102,,3,8413,Iron and Steel Products,TRUE,,N
