@@ -55,3 +55,20 @@ This project integrates **data warehousing** and **analytics** to provide a scal
 5. Run the python scripts in the scripts/python-script folder for data ingestion
 6. Run the SQL scripts in the scripts/database-script/dml folder for data cleasning, transformation and data loading.
 7. Use the sample CSV files in the data/ folder for testing.
+
+## Project Structure
+Investment-Risk-Management-Analytics/
+│
+├── README.md
+├── scripts/
+│   ├── create_tables.sql
+│   ├── load_data.sql
+│   ├── materialized_views.sql
+│   └── stored_procedures.sql
+├── data/
+│   ├── branches.csv
+│   ├── customers.csv
+│   └── products.csv
+└── docs/
+    ├── ER_Diagram.png
+    └── Data_Flow_Diagram.png
